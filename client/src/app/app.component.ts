@@ -1,17 +1,17 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, TemplateRef, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map, filter, switchMap } from 'rxjs/operators';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import * as Query from './global-query';
-import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   modalRef: BsModalRef;
   users: Array<any> = []; // List of Users
   user: any = {};
@@ -133,7 +133,7 @@ export class AppComponent {
   getUsers() {
     this.apollo.watchQuery({ query: Query.Users })
       .valueChanges
-      .map((result: any) => result.data.users).subscribe((data) => {
+      .pipe(map((result: any) => result.data.users)).subscribe((data) => {
         this.users = data;
       })
   }

@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -12,8 +13,8 @@
       "node_modules/@types"
     ],
     "lib": [
-      "esnext",
       "es2017",
+      "esnext",
       "dom"
     ]
   }
